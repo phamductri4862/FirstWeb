@@ -1,8 +1,7 @@
 const search = document.querySelector("#search");
 const qas = document.querySelectorAll("#qa");
 const qasText = [];
-qas.forEach((qa) => qasText.push(qa.innerText));
-console.log(qasText);
+qas.forEach((qa) => qasText.push(qa.innerText.toLowerCase()));
 
 function debounce(func, timeout = 100) {
   let timer;
@@ -16,7 +15,7 @@ function debounce(func, timeout = 100) {
 
 const inpFunc = debounce((e) => {
   qas.forEach((qa, i) => {
-    if (!qasText[i].includes(search.value)) {
+    if (!qasText[i].includes(search.value.toLowerCase())) {
       qa.classList.add("hidden");
     } else {
       qa.classList.remove("hidden");
