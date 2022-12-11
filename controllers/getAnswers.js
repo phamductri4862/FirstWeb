@@ -14,7 +14,6 @@ module.exports = {
     const input = Buffer.from(encodedInput, "base64").toString("utf-8");
 
     const splitMul = input.split(`"tp":"MultipleChoice","D":{"h":"`);
-    const str = [];
     const result = new Array(splitMul.length);
 
     for (let i = 1; i < splitMul.length; i++) {
@@ -24,7 +23,7 @@ module.exports = {
       let temp = `${splitMul[i].slice(
         from,
         splitMul[i].indexOf('"]', from)
-      )}\n`;
+      )}`.slice(0, 500);
 
       result[i].question = temp;
 
@@ -35,17 +34,10 @@ module.exports = {
         from = splitMul[i].indexOf('"c":', from) + 1;
         from = splitMul[i].indexOf('"c":', from) + 4;
         if (splitMul[i][from] == "t") result[i].correct = j;
-        result[i].answers[j] = ans;
-        temp += `${ans}\n`;
+        result[i].answers[j] = ans.slice(0, 500);
       }
-      temp += "\n";
-      str.push(temp);
     }
 
-    function sortComparer(a, b) {
-      return a.localeCompare(b);
-    }
-    str.sort(sortComparer);
     return res.render("getAnswers", {
       path: "/get-answers",
       pageTitle: "Get Answers",

@@ -2,7 +2,7 @@
     </head>
     <%- include('./includes/navigation.ejs') %>
 
-        <header class="masthead text-white text-center">
+        <header class="masthead text-white text-center" style="padding-top: calc(6rem + 20px);">
             <% if(!result){ %>
                 <div class="container">
                     <form id="contactForm" action="/get-answers" method="POST">
@@ -15,24 +15,35 @@
                         <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Get</button>
                     </form>
                     <% }else{ %>
-                        <% result.forEach((q,i)=> { %>
-                            <div class="container">
-                                <h2 class="" style="text-align:left;color: darkcyan;">
-                                    Câu <%= i%>. <%= q.question%>
-                                </h2>
-                            </div>
+                        <div class="input-group mb-3" style="padding-left: 10%; padding-right: 10%;">
+                            <input id="search" type=" text" class="form-control" placeholder="Search...">
+                        </div>
+                        <div id="defaultqa">
+                            <% result.forEach((q,i)=> { %>
+                                <div id="qa">
+                                    <div class=" container" id="q">
+                                        <h2 class="" style="text-align:left;color: darkcyan;">
+                                            Câu <%= i%>. <%= q.question%>
+                                        </h2>
+                                    </div>
 
-                            <div class="container" style="margin-bottom: 50px;">
-                                <% q.answers.forEach((a,i)=> { %>
-                                    <h3 class="<%= i === q.correct ? `text-correct` : 'text-body'%>"
-                                        style="text-align:left; text-indent: 50px; ">
-                                        <%= a %>
-                                    </h3>
-                                    <% }) %>
-                            </div>
+                                    <div class="container" style="margin-bottom: 50px;" id="a">
+                                        <% q.answers.forEach((a,i)=> { %>
+                                            <h3 class="<%= i === q.correct ? `text-correct` : 'text-body'%>"
+                                                style="text-align:left; text-indent: 50px; font-weight: normal">
+                                                <%= a %>
+                                            </h3>
+                                            <% }) %>
+                                    </div>
+                                </div>
 
-                            <% }) %>
-                                <% } %>
+
+                                <% }) %>
+                        </div>
+
+                        <% } %>
+
+
                 </div>
         </header>
 
