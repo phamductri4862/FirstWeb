@@ -1,0 +1,48 @@
+<%- include('../includes/header.ejs') %>
+	</head>
+
+	<%- include('../includes/navigation.ejs') %>
+
+		<header class="masthead text-white text-center">
+			<div class="container">
+				<!-- Contact Section Heading-->
+				<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2>
+				<!-- Icon Divider-->
+				<div class="divider-custom">
+					<div class="divider-custom-line"></div>
+					<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+					<div class="divider-custom-line"></div>
+				</div>
+				<!-- Contact Section Form-->
+				<div class="row justify-content-center">
+					<div class="col-lg-8 col-xl-7">
+						<!-- * * * * * * * * * * * * * * *-->
+						<!-- * * SB Forms Contact Form * *-->
+						<!-- * * * * * * * * * * * * * * *-->
+						<!-- This form is pre-integrated with SB Forms.-->
+						<!-- To make this form functional, sign up at-->
+						<!-- https://startbootstrap.com/solution/contact-forms-->
+						<!-- to get an API token!-->
+						<form id="contactForm" action="/login" method="POST">
+							<!-- Name input-->
+							<div class="form-floating mb-3">
+								<input class="form-control" id="name" type="text" placeholder="Email..." />
+								<label for="email">Email</label>
+								<div class="invalid-feedback">A name is required.
+								</div>
+							</div>
+							<!-- Email address input-->
+							<div class="form-floating mb-3">
+								<input class="form-control" id="email" type="password" placeholder="Pass..." />
+								<label for="password">Password</label>
+							</div>
+
+							<button class="btn btn-primary btn-xl disabled" id="submitButton"
+								type="submit">Login</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<%- include('../includes/footer.ejs') %>
