@@ -17,7 +17,7 @@ module.exports = {
     if (true) {
       try {
         let { body: result } = await got(
-          "https://myweb-ob7y.onrender.com/fakeWeb"
+          "https://byzantium-marlin-garb.cyclic.app/fakeWeb"
         );
         result = result.replace(/(\r\n|\n|\r)/gm, "");
         result = result.replace(/\s/g, "");
