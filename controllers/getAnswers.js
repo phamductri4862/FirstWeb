@@ -1,3 +1,7 @@
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const got = require("got");
+
 module.exports = {
   getAnswers(req, res) {
     res.render("getAnswers", {
@@ -8,14 +12,31 @@ module.exports = {
   },
 
   async postAnswers(req, res) {
+    let input;
+
+    // const test = await got("localhost:3000/fakeWeb");
+    // console.log(test.body);
+
+    if (false) {
+      try {
+        const test = await got(req.url);
+        const dom = new JSDOM(test.body);
+        const result = dom.window.document.documentElement.innerHTML;
+        result = result.replace(/(\r\n|\n|\r)/gm, "");
+        result = result.replace(/\s/g, "");
+        const startSplit = result.indexOf(`data="`) + 6;
+        result = result.slice(startSplit, result.indexOf(`";`, startSplit));
+        input = Buffer.from(result, "base64").toString("utf-8");
+      } catch (error) {
+        throw new Error(error);
+      }
+    } else {
+      input = Buffer.from(req.body.input, "base64").toString("utf-8");
+    }
+
     let alpha = ["A", "B", "C", "D"];
-
-    const { input: encodedInput } = req.body;
-    const input = Buffer.from(encodedInput, "base64").toString("utf-8");
-
     const splitMul = input.split(`"tp":"MultipleChoice","D":{"h":"`);
     const result = new Array(splitMul.length);
-
     for (let i = 1; i < splitMul.length; i++) {
       result[i] = { question: "", answers: [], correct: 0 };
       let from = 0;
