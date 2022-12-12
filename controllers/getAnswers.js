@@ -14,14 +14,11 @@ module.exports = {
   async postAnswers(req, res) {
     let input;
 
-    // const test = await got("localhost:3000/fakeWeb");
-    // console.log(test.body);
-
-    if (false) {
+    if (true) {
       try {
-        const test = await got(req.url);
-        const dom = new JSDOM(test.body);
-        const result = dom.window.document.documentElement.innerHTML;
+        let { body: result } = await got(
+          "https://myweb-ob7y.onrender.com/fakeWeb"
+        );
         result = result.replace(/(\r\n|\n|\r)/gm, "");
         result = result.replace(/\s/g, "");
         const startSplit = result.indexOf(`data="`) + 6;
